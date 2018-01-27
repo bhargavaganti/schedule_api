@@ -9,6 +9,7 @@ class PatientSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AppointmentSerializer(serializers.ModelSerializer):
+    date = serializers.DateField(input_formats=['%d/%m/%Y'], format='%d/%m/%Y')
 
     class Meta:
 
