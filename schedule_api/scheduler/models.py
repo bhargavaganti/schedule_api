@@ -27,10 +27,6 @@ class Appointment(models.Model):
     procedure = models.CharField(max_length=255)
 
     def __str__(self):
-        return str('Appointment for %s at %s %s %s' % (self.patient,
-                                                       self.date,
-                                                       self.start_time,
-                                                       self.end_time,
-                                                       self.procedure))
+        return str(self.patient)
 
 
