@@ -10,6 +10,8 @@ class PatientSerializer(serializers.ModelSerializer):
 
 class AppointmentSerializer(serializers.ModelSerializer):
     date = serializers.DateField(input_formats=['%d/%m/%Y'], format='%d/%m/%Y')
+    start_time = serializers.TimeField(input_formats=['%H:%M'], format='%H:%M')
+    end_time = serializers.TimeField(input_formats=['%H:%M'], format='%H:%M')
 
     class Meta:
 
