@@ -24,6 +24,22 @@ class AppointmentList(generics.ListCreateAPIView):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
 
+    ''' Check POST method for consistences '''
+    def post(self, request, *args, **kwargs):
+
+        appointment = AppointmentSerializer(data=request.data)
+
+        if (appointment.is_valid() == True):
+            date = appointment.validated_data['date']
+            start_time = appointment.validated_data['start_time']
+            end_time = appointment.validated_data['end_time']
+
+            if start_time >= end_time:
+                return Response({'error': 'Start time must be earlier than end time.'},
+                    status=status.HTTP_400_BAD_REQUEST)
+
+        return self.create(request, *args, **kwargs)
+
 ''' Return a list of described appointments with GET
     This method can also update an appointment with PUT 
     or delete with DELETE '''
