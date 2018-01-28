@@ -11,7 +11,7 @@ class PatientList(generics.ListCreateAPIView):
     serializer_class = PatientSerializer
 
 ''' Return a list of described patient with GET
-    This method can also update a  Patient with PUT 
+    This method can also update a patient with PUT 
     or delete with DELETE '''
 class PatientDetail(generics.RetrieveUpdateDestroyAPIView):
 
