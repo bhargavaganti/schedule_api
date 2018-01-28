@@ -52,3 +52,27 @@ class TestSchedulerAPI(TestCase):
             data={'name': 'Test Patient2', 'age': '31', 'id_number': '2'}
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_patient_duplicate_id(self):
+        '''create a duplicate patient '''
+        response = self.client.post(
+            path='/patients/',
+            data={'name': 'Test Patient1', 'age': '30', 'id_number': '1'}
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_patient_list(self):
+        ''' request all patients '''
+        response = self.client.get('/patients/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.json()), 1)
+
+    def test_patient_detail_onlist(self):
+        ''' request patient 1 '''
+        response = self.client.get('/patient/1/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_patient_detail_nonlist(self):
+        ''' request patient 2 '''
+        response = self.client.get('/patient/2/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
