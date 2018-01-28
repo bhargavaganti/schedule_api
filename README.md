@@ -62,5 +62,5 @@ Now, appointments can be used!
 
 and of course if it is needed, any patient can be updated too:
 
-`curl -X PUT http://localhost:8000/patient/3/ -H 'content-type:application/json' -d '{"id_number": 3, "name": "Sérgio", "age": 24}''
+`curl -X PUT http://localhost:8000/patient/3/ -H 'content-type:application/json' -d '{"id_number": 3, "name": "Sérgio", "age": 24}`
 
