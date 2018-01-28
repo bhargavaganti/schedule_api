@@ -1,8 +1,12 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from model_mommy import mommy
 from django.utils.timesince import datetime
 from scheduler.models import Patient, Appointment
 from scheduler.serializers import PatientSerializer
+
+from rest_framework.test import APIClient
+from rest_framework import status
+import json
 
 ''' Basics tests '''
 class TestPatient(TestCase):
@@ -28,14 +32,23 @@ class TestAppointment(TestCase):
     def test_appointment_creation(self):
         self.assertTrue(isinstance(self.appointment, Appointment))
 
-''' API Tests '''
-class TestDRFScheduler(TestCase):
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.client = APIClient()
+''' According to documentation @ DRF guides
+    /api-guide/testing/#apiclient       '''
+class TestSchedulerAPI(TestCase):
 
-        # create test patient
-        response = cls.client.post(
-            cls.PATIENT_RESOURCE,
-            {'name': 'Test Patient', 'doc_number': '12345678'}
+    def setUp(self):
+        client = APIClient()
+
+        # for patient test
+        client.post('/patients/',
+            {'name': 'Test Patient1', 'age': '30', 'id_number': '1'})
+
+
+    ''' Methods for patients '''
+    def test_create_patient(self):
+        '''create a new patient '''
+        response = self.client.post(
+            path='/patients/',
+            data={'name': 'Test Patient2', 'age': '31', 'id_number': '2'}
         )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
