@@ -18,6 +18,7 @@ class TestPatient(TestCase):
         self.assertEquals(self.patient.__str__(), self.patient.name)
         self.assertEquals(
             str(Patient.objects.get(name='teste')) , 'teste')
+        Patient.objects.filter(name='teste').delete()
 
 class TestAppointment(TestCase):
 
@@ -29,4 +30,12 @@ class TestAppointment(TestCase):
 
 ''' API Tests '''
 class TestDRFScheduler(TestCase):
-    pass
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.client = APIClient()
+
+        # create test patient
+        response = cls.client.post(
+            cls.PATIENT_RESOURCE,
+            {'name': 'Test Patient', 'doc_number': '12345678'}
+        )
