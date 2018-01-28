@@ -42,6 +42,10 @@ class TestSchedulerAPI(TestCase):
         # for patient test
         client.post('/patients/',
             {'name': 'Test Patient1', 'age': '30', 'id_number': '1'})
+        # for appointment test
+        client.post('/appointments/',
+            {"date": "01/03/2018", "start_time": "08:00",
+             "end_time": "09:00", "procedure": "Consulta", "patient": 1})
 
 
     ''' Methods for patients '''
@@ -76,3 +80,22 @@ class TestSchedulerAPI(TestCase):
         ''' request patient 2 '''
         response = self.client.get('/patient/2/')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+
+    ''' Methods for appointments '''
+    def test_create_valid_appointment(self):
+        '''create a new appointment out of the period of 1  '''
+        response = self.client.post(
+            path='/appointments/',
+            data={"date": "01/03/2018", "start_time": "09:10",
+                  "end_time": "10:00", "procedure": "Consulta", "patient": 1})
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_nvalid_appointments(self):
+        '''create a new appointment but overlaping periods '''
+        response = self.client.post(
+            path='/appointments/',
+            data={"date": "01/03/2018", "start_time": "07:00",
+                  "end_time": "09:00", "procedure": "Consulta", "patient": 1})
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
