@@ -1,21 +1,24 @@
 # schedule_api
 Scheduling system with Django Rest Framework (DRF).
 
-This application uses:
+This application uses Python3 (3.6.4) and requires:
+
 * Django==2.0.1
 * djangorestframework==3.7.7
 * model-mommy==1.5.1
 * pip==9.0.1
 * pytz==2017.3
 
-### API Interaction
-There was no recomendation for which class should be used for DRF, so I decided to use generic class-based Views, as it is so much simpler. For testing porpouses, there is no authentication, so any access is anonimously. The implementation have support for just 1 doctor, so all schedules are based in one "agenda".
+This project was created on macOS High Sierra (10.13.3) and Tested on same mac and a distro Debian (9.3.0).
 
-A test case is implemented in the folder `tests`.
+Need to run migrations!
+
+### API Interaction
+I decided to use generic class-based Views, as it is so much simpler. For testing porpouses, there is no authentication, so any access is anonimously. The implementation have support for just 1 doctor, so all schedules are based in one "calendar".
+
+Tests are implemented in the folder `/scheduler/tests/`.
 
 All the expected and required HTTP methods (GET, POST, PUT, DELETE) can be accessed with curl as seen above:
-
-If there is no patient in the DB, you can create one:
 
 |EndPoint         |HTTP Method  |CRUD Method  |Result                   |
 |:----------------|:------------|:------------|:------------------------|
@@ -24,6 +27,8 @@ If there is no patient in the DB, you can create one:
 |patients/        | POST        | CREATE      | Add a single patient    |
 |patient/id       | PUT         | UPDATE      | Update a single patient |
 |patient/id       | DELETE      | DELETE      | Delete a single patient |
+
+If there is no patient in the DB, you can create one:
 
 `curl -X POST http://localhost:8000/patients/ -H 'content-type:application/json' -d '{"id_number": 1, "name": "Leonardo", "age": 35}'`
 
