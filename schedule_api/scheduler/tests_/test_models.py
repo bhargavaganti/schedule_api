@@ -32,8 +32,10 @@ class TestAppointment(TestCase):
     def test_appointment_creation(self):
         self.assertTrue(isinstance(self.appointment, Appointment))
 
-''' According to documentation @ DRF guides
-    /api-guide/testing/#apiclient       '''
+'''
+According to documentation @ DRF guides
+/api-guide/testing/#apiclient
+'''
 class TestSchedulerAPI(TestCase):
 
     def setUp(self):
