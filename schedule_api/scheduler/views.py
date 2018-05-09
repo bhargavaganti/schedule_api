@@ -11,7 +11,7 @@ class PatientList(generics.ListCreateAPIView):
     serializer_class = PatientSerializer
 
 ''' Return a list of described patient with GET
-    This method can also update a patient with PUT 
+    This method can also update a patient with PUT
     or delete with DELETE '''
 class PatientDetail(generics.RetrieveUpdateDestroyAPIView):
 
@@ -73,7 +73,7 @@ class AppointmentList(generics.ListCreateAPIView):
                 return Response({'error': 'Bad appointment.'}, status=status.HTTP_400_BAD_REQUEST)
 
 ''' Return a list of described appointments with GET
-    This method can also update an appointment with PUT 
+    This method can also update an appointment with PUT
     or delete with DELETE '''
 class AppointmentDetail(generics.RetrieveUpdateDestroyAPIView):
 

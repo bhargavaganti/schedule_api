@@ -107,3 +107,5 @@ schedule_api/scheduler/migrations/0004_auto_20180127_1336.py
 schedule_api/scheduler/migrations/0005_auto_20180127_1339.py
 schedule_api/scheduler/migrations/0006_auto_20180127_1343.py
 schedule_api/scheduler/migrations/0007_auto_20180127_1409.py
+
+\.idea
